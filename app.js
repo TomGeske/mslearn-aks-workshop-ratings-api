@@ -7,18 +7,22 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const appInsights = require('applicationinsights');
-appInsights.setup('ae210bde-b2cb-424e-abd8-56954f99b974')
-    .setAutoDependencyCorrelation(true)
-    .setAutoCollectRequests(true)
-    .setAutoCollectPerformance(true, true)
-    .setAutoCollectExceptions(true)
-    .setAutoCollectDependencies(true)
-    .setAutoCollectConsole(true)
-    .setUseDiskRetryCaching(true)
-    .setSendLiveMetrics(false)
-    .setDistributedTracingMode(appInsights.DistributedTracingModes.AI)
-    .start();
+if(process.env.APPINSIGHTS_INSTRUMENTATION_KEY == undefined) {
+  console.warn("process.env.APPINSIGHTS_INSTRUMENTATION_KEY is undefined. To enable Application Insights set Instrumentation Key");
+} else {
+  const appInsights = require('applicationinsights');
+  appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATION_KEY)
+      .setAutoDependencyCorrelation(true)
+      .setAutoCollectRequests(true)
+      .setAutoCollectPerformance(true, true)
+      .setAutoCollectExceptions(true)
+      .setAutoCollectDependencies(true)
+      .setAutoCollectConsole(true)
+      .setUseDiskRetryCaching(true)
+      .setSendLiveMetrics(false)
+      .setDistributedTracingMode(appInsights.DistributedTracingModes.AI)
+      .start();
+}
 
 var app = express();
 
