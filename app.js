@@ -8,7 +8,17 @@ var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const appInsights = require('applicationinsights');
-appInsights.setup('ae210bde-b2cb-424e-abd8-56954f99b974').start();
+appInsights.setup('ae210bde-b2cb-424e-abd8-56954f99b974')
+    .setAutoDependencyCorrelation(true)
+    .setAutoCollectRequests(true)
+    .setAutoCollectPerformance(true, true)
+    .setAutoCollectExceptions(true)
+    .setAutoCollectDependencies(true)
+    .setAutoCollectConsole(true)
+    .setUseDiskRetryCaching(true)
+    .setSendLiveMetrics(false)
+    .setDistributedTracingMode(appInsights.DistributedTracingModes.AI)
+    .start();
 
 var app = express();
 
