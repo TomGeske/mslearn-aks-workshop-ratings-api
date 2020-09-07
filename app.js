@@ -11,8 +11,10 @@ if(process.env.APPINSIGHTS_INSTRUMENTATION_KEY == undefined) {
       .setAutoCollectConsole(true)
       .setUseDiskRetryCaching(true)
       .setSendLiveMetrics(false)
-      .setDistributedTracingMode(appInsights.DistributedTracingModes.AI)
-      .start();
+      .setDistributedTracingMode(appInsights.DistributedTracingModes.AI_AND_W3C);
+      
+  appInsights.defaultClient.context.tags[appInsights.defaultClient.context.keys.cloudRole] = "API";
+  appInsights.start();
 }
 
 require('dotenv').config();
