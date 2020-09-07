@@ -1,12 +1,3 @@
-require('dotenv').config();
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-
 if(process.env.APPINSIGHTS_INSTRUMENTATION_KEY == undefined) {
   console.warn("process.env.APPINSIGHTS_INSTRUMENTATION_KEY is undefined. To enable Application Insights set Instrumentation Key");
 } else {
@@ -23,6 +14,15 @@ if(process.env.APPINSIGHTS_INSTRUMENTATION_KEY == undefined) {
       .setDistributedTracingMode(appInsights.DistributedTracingModes.AI)
       .start();
 }
+
+require('dotenv').config();
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 var app = express();
 
