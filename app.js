@@ -7,6 +7,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const appInsights = require('applicationinsights');
+appInsights.setup('ae210bde-b2cb-424e-abd8-56954f99b974').start();
+
 var app = express();
 
 app.use(function (req, res, next) {
